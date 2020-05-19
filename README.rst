@@ -1,5 +1,5 @@
-Sealang (fork of pybee/sealang)
-===============================
+Sealang (fork of gtors/sealang, which is a fork of pybee/sealang)
+=================================================================
 
 .. image:: https://travis-ci.org/gtors/sealang.svg?branch=master
     :target: https://travis-ci.org/gtors/sealang
