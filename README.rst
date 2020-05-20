@@ -1,8 +1,8 @@
 Sealang (fork of gtors/sealang, which is a fork of pybee/sealang)
 =================================================================
 
-.. image:: https://travis-ci.org/gtors/sealang.svg?branch=master
-    :target: https://travis-ci.org/gtors/sealang
+.. image:: https://travis-ci.org/joxeankoret/sealang.svg?branch=master
+    :target: https://travis-ci.org/joxeankoret/sealang
 
 Sealang is an improved set of Python bindings for ``libclang``.
 
@@ -19,8 +19,49 @@ To compile Sealang, you'll need to:
 
 1. Install LLVM 6.0 (with clang)
 2. Set some environment variables
-3. pip install git+https://github.com/gtors/sealang#egg=sealang-6.0
+3. pip install git+https://github.com/joxeankoret/sealang#egg=sealang-6.0
 
+Basic Example
+-------------
+
+This is a basic example usage of sealang:
+
+.. code-block:: python
+
+    #!/usr/bin/python
+
+    import sealang
+
+    import clang
+    from clang import cindex
+
+    buf = """
+    #define VALUE_ONE 1
+
+    int test(int argc)
+    {
+      return argc > VALUE_ONE;
+    }
+    """
+
+    clang.cindex.Config.set_library_file("/usr/lib/llvm-6.0/lib/libclang.so")
+    idx = cindex.Index.create()
+    tu = idx.parse(path="t.c", unsaved_files=[("t.c", buf)])
+
+    # Get the function
+    f = list(tu.cursor.get_children())[0]
+    # Get the compound statement
+    l = list(f.get_children())
+    # Get the return statement
+    children = list(l[1].get_children())
+    # Get the binary operator
+    op = list(children[0].get_children())[0]
+    # Print the kind
+    print("Binary operator?", op.binary_operator)
+    # Get the literal
+    int_value = list(op.get_children())[1]
+    # And print the literal value for it
+    print("Literal?", int_value.literal)
 
 Usage
 -----
@@ -139,6 +180,6 @@ If you experience problems with Sealang, `log them on GitHub`_. If you
 want to contribute code, please `fork the code`_ and `submit a pull request`_.
 
 .. _Read The Docs: https://sealang.readthedocs.io
-.. _log them on Github: https://github.com/gtors/sealang/issues
-.. _fork the code: https://github.com/gtors/sealang
-.. _submit a pull request: https://github.com/gtors/sealang/pulls
+.. _log them on Github: https://github.com/joxeankoret/sealang/issues
+.. _fork the code: https://github.com/joxeankoret/sealang
+.. _submit a pull request: https://github.com/joxeankoret/sealang/pulls
