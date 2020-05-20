@@ -1,8 +1,8 @@
 Sealang (fork of gtors/sealang, which is a fork of pybee/sealang)
 =================================================================
 
-.. image:: https://travis-ci.org/gtors/sealang.svg?branch=master
-    :target: https://travis-ci.org/gtors/sealang
+.. image:: https://travis-ci.org/joxeankoret/sealang.svg?branch=master
+    :target: https://travis-ci.org/joxeankoret/sealang
 
 Sealang is an improved set of Python bindings for ``libclang``.
 
