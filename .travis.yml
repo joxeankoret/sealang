@@ -4,7 +4,6 @@ arch:
 dist: bionic
 language: python
 python:
- - "2.7"
  - "3.6"
 env:
   global:
@@ -16,7 +15,7 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - llvm-toolchain-trusty-6.0
+      - llvm-toolchain-bionic-6.0
     packages:
       - clang-6.0
       - libclang-6.0
